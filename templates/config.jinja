@@ -34,7 +34,7 @@ http {
 
     # turn on nginx_status on localhost
     server {
-        listen 127.0.0.1:80;
+        listen 127.0.0.1:{{ nginx.get('port', 80)  }};
         server_name 127.0.0.1;
         location /nginx_status {
             stub_status on;
@@ -46,7 +46,7 @@ http {
 {% if pillar['nginx'] is defined -%}
 {% if pillar['nginx']['redirect_numeric_ip']|default(False) %}
     server {
-        server_name {% for ip in salt['network.interfaces']()['eth0']['inet'] %}{{ ip['address'] }}:80{% if not loop.last %} {% endif %}{% endfor %};
+        server_name {% for ip in salt['network.interfaces']()['eth0']['inet'] %}{{ ip['address'] }}:{{ nginx.get('port', 80)  }}{% if not loop.last %} {% endif %}{% endfor %};
         return 302 {{ pillar['nginx']['redirect_numeric_ip'] }};
         access_log off;
     }
