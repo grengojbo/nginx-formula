@@ -1,21 +1,20 @@
-{% set nginx = pillar.get('nginx', {}) -%}
-{% set version = nginx.get('version', '1.5.2') -%}
-{% set checksum = nginx.get('checksum', 'sha1=3546be28a72251f8823ab6be6a1180d300d06f76') -%}
-{% set home = nginx.get('home', '/var/www') -%}
-{% set source = nginx.get('source_root', '/usr/local/src') -%}
-
-{% set nginx_package = source + '/nginx-' + version + '.tar.gz' -%}
-{% set nginx_home     = home + "/nginx-" + version -%}
-{% set nginx_modules_dir = source + "/nginx-modules" -%}
+{% set nginx = pillar.get('nginx', {}) %}
+{% set version = nginx.get('version', '1.5.2') %}
+{% set checksum = nginx.get('checksum', 'sha1=3546be28a72251f8823ab6be6a1180d300d06f76') %}
+{% set home = nginx.get('home', '/var/www') %}
+{% set source = nginx.get('source_root', '/usr/local/src') %}
+{% set nginx_package = source + '/nginx-' + version + '.tar.gz' %}
+{% set nginx_home = home + "/nginx-" + version %}
+{% set nginx_modules_dir = source + "/nginx-modules" %}
 
 include:
   - nginx.users
-  {% if nginx['with_luajit'] -%}
+{% if nginx['with_luajit'] -%}
   - nginx.luajit2
-  {% endif -%}
-  {% if nginx['with_openresty'] -%}
+{% endif -%}
+{% if nginx['with_openresty'] -%}
   - nginx.openresty
-  {% endif -%}
+{% endif -%}
 
 nginx_group:
   group.present:
