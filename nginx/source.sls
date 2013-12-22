@@ -8,15 +8,14 @@
 {% set nginx_home     = home + "/nginx-" + version -%}
 {% set nginx_modules_dir = source + "/nginx-modules" -%}
 
-{% if nginx['with_luajit'] -%}
 include:
+  - nginx.users
+  {% if nginx['with_luajit'] -%}
   - nginx.luajit2
-{% endif -%}
-
-{% if nginx['with_openresty'] -%}
-include:
+  {% endif -%}
+  {% if nginx['with_openresty'] -%}
   - nginx.openresty
-{% endif -%}
+  {% endif -%}
 
 nginx_group:
   group.present:

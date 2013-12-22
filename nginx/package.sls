@@ -1,4 +1,5 @@
-
+include:
+  - nginx.users
 nginx-old-init:
   file:
     - rename
