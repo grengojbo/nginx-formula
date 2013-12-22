@@ -56,7 +56,7 @@ nginx-logger-{{ log_type }}:
 {% for dir in ('sites-enabled', 'sites-available') %}
 /etc/nginx/{{ dir }}:
   file.directory:
-    - user: www-data
+    - user: root
     - group: www-data
-    - mode: 0755
+    - mode: 0750
 {% endfor -%}

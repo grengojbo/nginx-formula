@@ -1,6 +1,3 @@
-include:
-  - nginx.common
-
 {% set nginx = pillar.get('nginx', {}) -%}
 {% set version = nginx.get('version', '1.5.2') -%}
 {% set checksum = nginx.get('checksum', 'sha1=3546be28a72251f8823ab6be6a1180d300d06f76') -%}
