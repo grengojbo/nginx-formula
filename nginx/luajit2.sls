@@ -1,6 +1,8 @@
-{% set nginx = pillar.get('nginx', {}) -%}
-{% set home = nginx.get('home', '/var/www') -%}
-{% set source = nginx.get('source_root', '/usr/local/src') -%}
+{% set nginx = pillar.get('nginx', {}) %}
+{% set home = nginx.get('home', '/var/www') %}
+{% set source = nginx.get('source_root', '/usr/local/src') %}
+{% set version = nginx.get('version', '1.5.2') %}
+{% set nginx_home = home + "/nginx-" + version %}
 
 get-luajit2:
   file.managed:

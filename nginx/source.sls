@@ -8,13 +8,14 @@
 {% set nginx_modules_dir = source + "/nginx-modules" %}
 
 include:
+  - nginx.common
   - nginx.users
-{% if nginx['with_luajit'] -%}
+{% if nginx['with_luajit'] %}
   - nginx.luajit2
-{% endif -%}
-{% if nginx['with_openresty'] -%}
+{% endif %}
+{% if nginx['with_openresty'] %}
   - nginx.openresty
-{% endif -%}
+{% endif %}
 
 nginx_group:
   group.present:
@@ -71,7 +72,7 @@ get-nginx-{{name}}:
     - watch:
       - file: get-nginx
     - require_in:
-      - cmd: make-nginx
+      - cmd: nginx
 {% endfor -%}
 
 get-ngx_devel_kit:

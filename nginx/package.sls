@@ -1,4 +1,5 @@
 include:
+  - nginx.common
   - nginx.users
 nginx-old-init:
   file:
